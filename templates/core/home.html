@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang = "en-us">
+  {% include "nav.html" %}
+    <head>
+      {% load static %}
+      {% include "bootstrap.html" %}
+      <link rel="stylesheet" href= "//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css"/>
+      <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"/>
+  
+      <meta charset="utf-8"/>
+      <title>Organizer</title>
+      
+    </head>
+
+  <body>
+   
+    <div class="ct-chart ct-perfect-fourth", id="example-pie-chart"></div>
+
+
+    <script>
+      new Chartist.Pie('#example-pie-chart',
+        { labels: ['Completed', 'Pending'], series: [3, 3] },
+        { labelInterpolationFnc: function(value) { return value[0] } },
+        [['screen', { chartPadding: 20, labelOffset: 60, labelDirection: 'explode',
+        labelInterpolationFnc: function(value) { return value;}}]]);
+    </script>
+
+
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-6">
+          <div class="ct-pie-chart ct-perfect-fourth">
+            <script type="text/javascript">
+              var data = {
+                {% if complete == 0 and incomplete != 0 %}
+                  labels: ["incomplete", ""],
+                {% elif complete != 0 and incomplete == 0 %}
+                  labels: ["complete", ""],
+                {% else %}
+                  labels: ["complete", "incomplete"],
+                {% endif %} 
+                series: [{{complete}}, {{incomplete}}]
+                // <!-- series: [data] -->
+              };
+              new Chartist.Pie('.ct-pie-chart', data);
+            </script>
+          </div>
+          <div class="center">
+            <a href="/tasks/" class="btn btn-primary">Tasks</a>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="ct-bar-chart ct-perfect-fourth">
+            <script type="text/javascript">
+            var data = {
+              labels: [
+                {% for i in bud %}
+                  "{{i.description}}",
+                {% endfor %}
+              ],
+              series: [
+                [
+                  {% for i in bud %}
+                    {{i.actual}},
+                  {% endfor %}
+                  ],
+                [
+                  {% for i in bud %}
+                    {{i.projected}},
+                  {% endfor %}
+                ]
+              ]
+            };
+            new Chartist.Bar('.ct-bar-chart', data);
+            </script>
+          </div>
+          <div class="center">
+            <a href="/budget/" class="btn btn-primary">Budget</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+    

@@ -1,0 +1,71 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tasks</title>
+  {% include "bootstrap.html" %}
+    {% load static %}
+  <script src="{% static 'tasks.js' %}"></script>
+</head>
+<body>
+  {% include "nav.html" %}
+    <div class="jumbotron">
+      <h1>Task Entries</h1>
+      {% if not table_data %}
+        </p>There are no task entries to display.</p>
+      {% else %}
+      <table class="table table-striped" border="1">
+        <tr>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Complete</th>
+          <th>Action</th>
+
+
+        </tr>
+        {% for row in table_data %}
+          <tr>
+          <td>{{ row.description }}</td>
+          <td>{{ row.category }}</td>
+          <form method = "POST" action = "/tasks/toggle/{{row.id}}/">
+            {% csrf_token %}
+            {%if row.is_completed == True %}
+              <td><button name="YES"><a>Yes</a></button></td>
+              {% else %}
+              <td><button name="NO"><a>No</a></button></td>
+            {% endif %}
+          </form>
+
+          <td>
+            <a class="btn btn-primary" href="/tasks/edit/{{ row.id }}/">Edit</a>
+            <a class="btn btn-primary" href="#" onclick="confirmDeleteModal({{row.id}})">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+      <form method="GET" action="/tasks/add/">
+        <input type="submit" class="btn btn-primary" value = "Add Task Entry">
+      </form>
+    </div>
+
+  <!-- Modal -->
+  <div id="deleteModal" class="modal fade" role='dialog'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Delete Task Entry</h4>
+        </div>
+        <div class="modal-body">
+          <p>Do you really want to delete this Task Entry?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <span id= 'deleteButton'></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Modal ends here--->
+</body>
+</html>
