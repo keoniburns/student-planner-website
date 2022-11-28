@@ -9,6 +9,8 @@ from tasks.models import TaskCategory, TasksEntry
 from budget.models import BudgetCategory, BudgetEntry
 
 # Create your views here.
+
+
 def join(request):
     if (request.method == "POST"):
         join_form = JoinForm(request.POST)
@@ -23,32 +25,32 @@ def join(request):
             return redirect("/")
         else:
             # Form invalid, print errors to console
-            page_data = { "join_form": join_form }
+            page_data = {"join_form": join_form}
             return render(request, 'core/join.html', page_data)
     else:
         join_form = JoinForm()
-        page_data = { "join_form": join_form }
+        page_data = {"join_form": join_form}
         return render(request, 'core/join.html', page_data)
+
 
 @login_required(login_url='/login/')
 def home(request):
 
-    userTask = TasksEntry.objects.filter(user = request.user)
-    userBudget = BudgetEntry.objects.filter(user = request.user)
-
+    userTask = TasksEntry.objects.filter(user=request.user)
+    userBudget = BudgetEntry.objects.filter(user=request.user)
 
     incompTasks = len([z for z in userTask if z.is_completed == False])
     compTasks = len([w for w in userTask if w.is_completed == True])
 
-    
-    context = { 
+    context = {
         "bud": userBudget,
         "complete": compTasks,
-        "incomplete": incompTasks 
+        "incomplete": incompTasks
     }
 
-
     return render(request, 'core/home.html', context)
+
+
 def about(request):
     return render(request, 'core/about.html')
 
@@ -64,10 +66,10 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             # If we have a user
             if user:
-                #Check it the account is active
+                # Check it the account is active
                 if user.is_active:
                     # Log the user in.
-                    login(request,user)
+                    login(request, user)
                     # Send the user back to homepage
                     return redirect("/")
                 else:
@@ -75,11 +77,13 @@ def user_login(request):
                     return HttpResponse("Your account is not active.")
             else:
                 print("Someone tried to login and failed.")
-                print("They used username: {} and password: {}".format(username,password))
+                print("They used username: {} and password: {}".format(
+                    username, password))
                 return render(request, 'core/login.html', {"login_form": LoginForm})
     else:
-        #Nothing has been provided for username or password.
+        # Nothing has been provided for username or password.
         return render(request, 'core/login.html', {"login_form": LoginForm})
+
 
 @login_required(login_url='/login/')
 def user_logout(request):
@@ -87,4 +91,4 @@ def user_logout(request):
     logout(request)
     # Return to homepage.
     return redirect("/")
-#this will have join login logout about ltr
+# this will have join login logout about ltr

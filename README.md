@@ -1,5 +1,6 @@
 # 465FinalProject
-    Our project consists of a homework scheduler that builds a schedule ordered by date on their upcoming deadlines. It takes a user's input for the classes and their homework which is ordered by date and uses the class id to organize what class they have homework due for. The idea behind this is to then build a schedule based on their enrolled classes and what times they will be free and dedicated homework times. The purpose is to help increase efficiency and allow the user to become more organized so they can do stuff during their free time. 
+
+Our project consists of a homework scheduler that builds a schedule ordered by date on their upcoming deadlines. It takes a user's input for the classes and their homework which is ordered by date and uses the class id to organize what class they have homework due for. The idea behind this is to then build a schedule based on their enrolled classes and what times they will be free and dedicated homework times. The purpose is to help increase efficiency and allow the user to become more organized so they can do stuff during their free time. 
 
 Home page - shows a brief description from each page
 Table showing the homework done 

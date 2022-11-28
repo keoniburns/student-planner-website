@@ -18,24 +18,28 @@ from django.urls import path
 from core import views as core_views
 from tasks import views as task_views
 from budget import views as budget_views
+from calendar import views as calendar_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('',core_views.home,name='home'),
-    path('',core_views.home),
-    path('about/',core_views.about),
-    path('join/',core_views.join),
-    path('login/',core_views.user_login),
-    path('logout/',core_views.user_logout),
-    #add rest of core under here
-
-    path('budget/',budget_views.budget),
-    path('budget/add/',budget_views.add),
-    path('budget/edit/<int:id>/',budget_views.edit), 
+    path('', core_views.home),
+    path('about/', core_views.about),
+    path('join/', core_views.join),
+    path('login/', core_views.user_login),
+    path('logout/', core_views.user_logout),
 
 
-    path('tasks/',task_views.tasks), 
-    path('tasks/add/',task_views.add), 
+    path('budget/', budget_views.budget),
+    path('budget/add/', budget_views.add),
+    path('budget/edit/<int:id>/', budget_views.edit),
+
+
+    path('tasks/', task_views.tasks),
+    path('tasks/add/', task_views.add),
     path('tasks/toggle/<int:id>/', task_views.toggle),
-    path('tasks/edit/<int:id>/',task_views.edit), 
+    path('tasks/edit/<int:id>/', task_views.edit),
+
+    path('calendar/', calendar_views.calendar),
+
+
 ]

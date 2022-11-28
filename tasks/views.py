@@ -7,15 +7,20 @@ from tasks.forms import TasksEntryForm
 from django.contrib.auth.models import User
 from tasks.models import TasksEntry, TaskCategory
 
+
 # Create your views here.
+
+
 @login_required(login_url='/login/')
 def tasks(request):
-    if(TaskCategory.objects.count() == 0):
-        TaskCategory(category = "Home").save()
-        TaskCategory(category = "School").save()
-        TaskCategory(category = "Work").save()
-        TaskCategory(category = "Self-Improvement").save()
-        TaskCategory(category = "Other").save()
+    if (TaskCategory.objects.count() == 0):
+
+        # this is going to have to be changed to be dynamically allocated based on the courses the student is enrolled in
+        TaskCategory(category="Home").save()
+        TaskCategory(category="School").save()
+        TaskCategory(category="Work").save()
+        TaskCategory(category="Self-Improvement").save()
+        TaskCategory(category="Other").save()
     if (request.method == "GET" and "delete" in request.GET):
         id = request.GET["delete"]
         TasksEntry.objects.filter(id=id).delete()
@@ -26,6 +31,7 @@ def tasks(request):
             "table_data": table_data
         }
         return render(request, 'tasks/tasks.html', context)
+
 
 @login_required(login_url='/login/')
 def add(request):
@@ -38,7 +44,8 @@ def add(request):
                 category = add_form.cleaned_data["category"]
                 user = User.objects.get(id=request.user.id)
                 # TasksEntry(user=user, description=description, entry=entry).save()
-                TasksEntry(user=user, description=description, category=category).save()
+                TasksEntry(user=user, description=description,
+                           category=category).save()
                 return redirect("/tasks/")
             else:
                 context = {
@@ -53,6 +60,7 @@ def add(request):
             "form_data": TasksEntryForm()
         }
     return render(request, 'tasks/add.html', context)
+
 
 @login_required(login_url='/login/')
 def edit(request, id):
@@ -78,13 +86,16 @@ def edit(request, id):
                 }
                 return render(request, 'tasks/add.html', context)
         else:
-            #Cancel
+            # Cancel
             return redirect("/tasks/")
+
 
 def toggle(request, id):
     if (request.method == "POST" and "YES" in request.POST):
-        TasksEntry.objects.filter(user = request.user, id = id).update(is_completed = False)
+        TasksEntry.objects.filter(
+            user=request.user, id=id).update(is_completed=False)
         return redirect('/tasks/')
-    elif(request.method == "POST" and "NO" in request.POST):
-        TasksEntry.objects.filter(user = request.user, id = id).update(is_completed = True)
+    elif (request.method == "POST" and "NO" in request.POST):
+        TasksEntry.objects.filter(
+            user=request.user, id=id).update(is_completed=True)
         return redirect('/tasks/')
