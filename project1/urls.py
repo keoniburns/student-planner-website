@@ -19,6 +19,7 @@ from core import views as core_views
 from tasks import views as task_views
 from budget import views as budget_views
 from calendar import views as calendar_views
+from LFG import views as LFG_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,18 +29,21 @@ urlpatterns = [
     path('login/', core_views.user_login),
     path('logout/', core_views.user_logout),
 
-
+    # budget_views
     path('budget/', budget_views.budget),
     path('budget/add/', budget_views.add),
     path('budget/edit/<int:id>/', budget_views.edit),
 
-
+    # task_views
     path('tasks/', task_views.tasks),
     path('tasks/add/', task_views.add),
     path('tasks/toggle/<int:id>/', task_views.toggle),
     path('tasks/edit/<int:id>/', task_views.edit),
 
+    # LFG views
+    path('LFG/', LFG_views.LFG),
+    path('LFG/add/', LFG_views.add),
+    path('LFG/edit/<int:id>', LFG_views.edit),
+
     path('calendar/', calendar_views.calendar),
-
-
 ]
