@@ -18,7 +18,7 @@ from django.urls import path
 from core import views as core_views
 from tasks import views as task_views
 from budget import views as budget_views
-from calendar import views as calendar_views
+from td_calendar import views as calendar_views
 from LFG import views as LFG_views
 
 urlpatterns = [
@@ -45,5 +45,5 @@ urlpatterns = [
     path('LFG/add/', LFG_views.add),
     path('LFG/edit/<int:id>', LFG_views.edit),
 
-    path('calendar/', calendar_views.calendar),
+    path('td_calendar/', calendar_views.td_calendar),
 ]

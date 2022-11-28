@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'core',
     'tasks',
     'LFG',
-    'calendar'
+    'td_calendar'
 ]
 
 MIDDLEWARE = [

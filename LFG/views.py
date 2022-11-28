@@ -24,7 +24,7 @@ def LFG(request):
     else:
         table_data = LFGEntry.objects.filter(user=request.user)
         context = {
-            "form_data": table_data
+            "table_data": table_data
         }
     return render(request, 'LFG/LFG.html', context)
 
