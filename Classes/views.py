@@ -41,7 +41,7 @@ def add(request):
                 category = add_form.cleaned_data["category"]
                 year = add_form.cleaned_data["year"]
 
-                ClassesEntry(user=user, name=name, units=units, category=category, actual=actual).save()
+                ClassesEntry(user=user, name=name, units=units, category=category, year=year).save()
                 return redirect("/Classes/")
             else:
                 context = {
@@ -60,9 +60,8 @@ def add(request):
 @login_required(login_url='/login/')
 def edit(request, id):
     if (request.method == "GET"):
-        # Load Journal Entry Form with current model data.
-        ClassesEntry = ClassesEntry.objects.get(id=id)
-        form = ClassesEntryForm(instance = ClassesEntry)
+        classesEntry = ClassesEntry.objects.get(id=id)
+        form = ClassesEntryForm(instance = classesEntry)
         context = {"form_data": form}
         return render(request, 'Classes/edit.html', context)
     elif (request.method == "POST"):
@@ -70,10 +69,10 @@ def edit(request, id):
         if ("edit" in request.POST):
             form = ClassesEntryForm(request.POST)
             if (form.is_valid()):
-                ClassesEntry = form.save(commit=False)
-                ClassesEntry.user = request.user
-                ClassesEntry.id = id
-                ClassesEntry.save()
+                classesEntry = form.save(commit=False)
+                classesEntry.user = request.user
+                classesEntry.id = id
+                classesEntry.save()
                 return redirect("/Classes/")
             else:
                 context = {
