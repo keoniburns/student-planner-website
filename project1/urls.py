@@ -45,5 +45,6 @@ urlpatterns = [
     path('LFG/add/', LFG_views.add),
     path('LFG/edit/<int:id>/', LFG_views.edit),
 
+    # Calendar views
     path('td_calendar/', calendar_views.td_calendar),
 ]
