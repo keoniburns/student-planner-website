@@ -18,6 +18,7 @@ from django.urls import path
 from core import views as core_views
 from tasks import views as task_views
 from budget import views as budget_views
+from Classes import views as Classes_views
 from td_calendar import views as calendar_views
 from LFG import views as LFG_views
 
@@ -39,6 +40,11 @@ urlpatterns = [
     path('tasks/add/', task_views.add),
     path('tasks/toggle/<int:id>/', task_views.toggle),
     path('tasks/edit/<int:id>/', task_views.edit),
+
+    # Classes_views
+    path('Classes/', Classes_views.Classes),
+    path('Classes/add/', Classes_views.add),
+    path('Classes/edit/<int:id>/', Classes_views.edit),
 
     # LFG views
     path('LFG/', LFG_views.LFG),
