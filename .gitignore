@@ -1,2 +1,4 @@
 *.pyc
 *.JPEG
+*.sqlite3
+*/migrations
