@@ -43,7 +43,7 @@ urlpatterns = [
     # LFG views
     path('LFG/', LFG_views.LFG),
     path('LFG/add/', LFG_views.add),
-    path('LFG/edit/<int:id>', LFG_views.edit),
+    path('LFG/edit/<int:id>/', LFG_views.edit),
 
     path('td_calendar/', calendar_views.td_calendar),
 ]
