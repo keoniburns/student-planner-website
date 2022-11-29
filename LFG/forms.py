@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class LFGEntryForm(forms.ModelForm):
     category = forms.ModelChoiceField(queryset=LFGCategory.objects.all())
     assignment = forms.CharField(widget=forms.TextInput(attrs={'size': '100'}))
-    description = forms.CharField(widget=forms.TextInput(attrs={'size': '200'}))
+    description = forms.CharField(widget=forms.TextInput(attrs={'size': '100'}))
     location = forms.CharField(widget=forms.TextInput(attrs={'size': '100'}))
     contact = forms.CharField(widget=forms.TextInput(attrs={'size': '100'}))
 
