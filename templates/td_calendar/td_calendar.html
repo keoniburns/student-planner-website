@@ -9,12 +9,14 @@
 
 <body>
   {% include "nav.html" %}
-  <h1>
-    Calendar
-  </h1>
+  <div style="display: flex; justify-content: space-around;">
+    <div id="calendarContainer" style="display: inline-block;"></div>
+    <div id="organizerContainer" style="display: inline-block;">
+    </div>
+  </div>
+  <br>
+  <button class="btn btn-primary">Add Event</button>
 
-  <div id="calendarContainer"></div>
-  <div id="organizerContainer"></div>
 
   <!-- Stick script at the end of the body -->
   <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
