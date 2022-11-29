@@ -10,6 +10,6 @@ class ClassesCategory(models.Model):
 class ClassesEntry(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
-    units = models.CharField(max_length=128)
+    units = models.CharField(max_length=2)
     category = models.ForeignKey(ClassesCategory, on_delete=models.CASCADE)
-    year = models.CharField(max_length=128)
+    year = models.CharField(max_length=6)

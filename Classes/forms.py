@@ -6,9 +6,9 @@ from django.contrib.auth.models import User
 
 class ClassesEntryForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'size': '80'}))
-    units = forms.CharField(widget=forms.TextInput(attrs={'size': '80'}))
+    units = forms.CharField(widget=forms.TextInput(attrs={'size': '20'}))
     category = forms.ModelChoiceField(queryset=ClassesCategory.objects.all())
-    year = forms.CharField(widget=forms.TextInput(attrs={'size': '80'}))
+    year = forms.CharField(widget=forms.TextInput(attrs={'size': '20'}))
 
     class Meta():
         model = ClassesEntry
