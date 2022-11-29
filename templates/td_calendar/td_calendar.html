@@ -1,7 +1,27 @@
 <html>
+
 <head>
-  </head>
-  <body>
-    <h1> To Do Calendar </h1>
-  </body>
+  {% include "bootstrap.html" %}
+  {% load static %}
+  <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css"
+    rel="stylesheet" />
+</head>
+
+<body>
+  {% include "nav.html" %}
+  <h1>
+    Calendar
+  </h1>
+
+  <div id="calendarContainer"></div>
+  <div id="organizerContainer"></div>
+
+  <!-- Stick script at the end of the body -->
+  <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
+  <script src="{% static 'td_calendar.js' %}"></script>
+  <script>
+    /* Fill with whatever your dreams desire */
+  </script>
+</body>
+
 </html>
