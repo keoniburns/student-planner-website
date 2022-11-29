@@ -7,6 +7,7 @@ from core.forms import JoinForm, LoginForm
 from django.contrib.auth.decorators import login_required
 from tasks.models import TaskCategory, TasksEntry
 from budget.models import BudgetCategory, BudgetEntry
+from LFG.models import LFGCategory, LFGEntry
 
 # Create your views here.
 
@@ -42,10 +43,13 @@ def home(request):
     incompTasks = len([z for z in userTask if z.is_completed == False])
     compTasks = len([w for w in userTask if w.is_completed == True])
 
+    LFG = LFGEntry.objects.all()
+
     context = {
         "bud": userBudget,
         "complete": compTasks,
-        "incomplete": incompTasks
+        "incomplete": incompTasks,
+        "LFG": LFG
     }
 
     return render(request, 'core/home.html', context)
