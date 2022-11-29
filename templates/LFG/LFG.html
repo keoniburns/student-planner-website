@@ -31,7 +31,11 @@
           <td>{{ row.contact }}</td>
           <td>
             <a class="btn btn-primary" href="/LFG/edit/{{ row.id }}/">Edit</a>
-            <a class="btn btn-primary" href="#" onclick= "confirmDeleteModal( {{row.id}})">Delete</a>
+            <!-- <a class="btn btn-primary" href="#" onclick= "confirmDeleteModal( {{row.id}})">Delete</a>
+            -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+              Delete
+            </button>
             </td>
           </tr>
         {% endfor %}
@@ -60,5 +64,11 @@
         </div>
       </div>
     </div>
+
+
+
+
+
+
   </body>
 </html>

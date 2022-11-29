@@ -83,25 +83,28 @@
 
     <!-- code for LFG for everyone -->
     <h1> Looking For Group Posts </h1>
-    <div class="accordion" id="accordionPanelsStayOpenExample">
-      {% for P in LFG %}
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-heading{{ forloop.counter }}">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="panelsStayOpen-collapse{{ forloop.counter }}">
-            {{ P.category }}: {{ P.assignment }}
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapse{{ forloop.counter }}" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading{{ forloop.counter }}">
-          <div class="accordion-body">
-            <li><strong>Owner: </strong> {{ P.user }} </li>
-            <li><strong>Description: </strong> {{ P.description }} </li>
-            <li><strong>Location: </strong> {{ P.location }} </li>
-            <li><strong>Contact: </strong> {{ P.contact }} </li>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
+<div id="accordion">
+  {% for P in LFG %}
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+          {{ P.category }}: {{ P.assignment }}
+        </button>
+      </h5>
     </div>
+
+    <div id="collapse{{ forloop.counter }}" class="collapse show" aria-labelledby="heading{{ forloop.counter }}" data-parent="#accordion">
+      <div class="card-body">
+        <li><strong>Owner: </strong> {{ P.user }} </li>
+        <li><strong>Description: </strong> {{ P.description }} </li>
+        <li><strong>Location: </strong> {{ P.location }} </li>
+        <li><strong>Contact: </strong> {{ P.contact }} </li>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 
 
 
