@@ -8,10 +8,22 @@ td {
 
 tr:hover {background-color: coral;}
 
-h1 { text-align: center; }
+h1 {
+  font-size: 50px;
+  text-align: center; }
 
 body {
-  /*background-image: url("imgs/BG.jpg"); */
+  /*background-image: url("imgs/BG.jpg");*/
   background-image: url("imgs/meme.png");
   background-color: #cccccc;
 }
+
+
+
+.jumbotron {
+  background-color: silver;
+}
+
+.jumbotron p {font-size:27px; }
+
+p { font-size: 27px;}
