@@ -10,13 +10,19 @@
 
 <body>
   {% include "nav.html" %}
-  <div style="display: flex; justify-content: space-around;">
+  <div style="display: flex; justify-content: space-around; padding: 5px;">
     <div id="calendarContainer" style="display: inline-block;"></div>
     <div id="organizerContainer" style="display: inline-block;">
     </div>
   </div>
   <br>
-  <button class="btn btn-primary">Add Event</button>
+  <div style="display: flex; justify-content: flex-start; flex-direction: column;">
+    <form method="GET" action="/td_calendar/newEvent">
+      <input type="submit" class="btn btn-primary" value="add new event" style="margin-left: 10px; margin-right: 10px;">
+    </form>
+    <!-- <button class="btn btn-primary" style="margin-left: 10px; margin-right: 10px;">Add Event</button> -->
+  </div>
+
 
 
   <!-- Stick script at the end of the body -->

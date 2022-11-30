@@ -53,4 +53,5 @@ urlpatterns = [
 
     # Calendar views
     path('td_calendar/', calendar_views.td_calendar),
+    path('td_calendar/newEvent/', calendar_views.newEvent),
 ]
