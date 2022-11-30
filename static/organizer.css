@@ -6,3 +6,12 @@ td {
   font-size: 24px;
 }
 
+tr:hover {background-color: coral;}
+
+h1 { text-align: center; }
+
+body {
+  /*background-image: url("imgs/BG.jpg"); */
+  background-image: url("imgs/meme.png");
+  background-color: #cccccc;
+}
