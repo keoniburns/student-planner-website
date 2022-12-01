@@ -18,8 +18,10 @@
     {% else %}
     <table class="table table-striped" border="1">
       <tr>
+        <th>Task</th>
         <th>Description</th>
         <th>Category</th>
+        <th>Due Date</th>
         <th>Complete</th>
         <th>Action</th>
 
@@ -27,8 +29,10 @@
       </tr>
       {% for row in table_data %}
       <tr>
+        <td>{{ row.task }}</td>
         <td>{{ row.description }}</td>
         <td>{{ row.category }}</td>
+        <td>{{ row.date }}</td>
         <form method="POST" action="/tasks/toggle/{{row.id}}/">
           {% csrf_token %}
           {%if row.is_completed == True %}

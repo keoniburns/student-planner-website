@@ -5,10 +5,12 @@ from django.db import models
 
 
 class TasksEntryForm(forms.ModelForm):
+    task = forms.CharField(widget=forms.TextInput(attrs={'size': '50'}))
     description = forms.CharField(widget=forms.TextInput(attrs={'size': '80'}))
     category = forms.ModelChoiceField(queryset=TaskCategory.objects.all())
+    date = forms.DateField(widget=forms.SelectDateWidget)
 
     class Meta():
         model = TasksEntry
-        fields = ('description', 'category')
+        fields = ('task','description', 'category','date')
         # fields = ('description', ['category'])

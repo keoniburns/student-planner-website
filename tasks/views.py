@@ -39,13 +39,15 @@ def add(request):
         if ("add" in request.POST):
             add_form = TasksEntryForm(request.POST)
             if (add_form.is_valid()):
+                task = add_form.cleaned_data["task"]
                 description = add_form.cleaned_data["description"]
+                date = add_form.cleaned_data["date"]
                 # entry = add_form.cleaned_data["entry"]
                 category = add_form.cleaned_data["category"]
                 user = User.objects.get(id=request.user.id)
                 # TasksEntry(user=user, description=description, entry=entry).save()
-                TasksEntry(user=user, description=description,
-                           category=category).save()
+                TasksEntry(user=user, task=task, description=description,
+                           category=category, date = date).save()
                 return redirect("/tasks/")
             else:
                 context = {

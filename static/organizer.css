@@ -13,8 +13,8 @@ h1 {
   text-align: center; }
 
 body {
-  /*background-image: url("imgs/BG.jpg");*/
-  background-image: url("imgs/meme.png");
+  background-image: url("imgs/BG.jpg");
+  /*background-image: url("imgs/meme.png");*/
   background-color: #cccccc;
 }
 
