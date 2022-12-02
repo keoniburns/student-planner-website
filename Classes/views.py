@@ -24,7 +24,7 @@ def Classes(request):
     else:
         table_data = ClassesEntry.objects.filter(user=request.user)
         context = {
-            "table_data": table_data
+            "table_data": table_data,
         }
 
     return render(request, 'Classes/Classes.html', context)
