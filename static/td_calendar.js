@@ -45,41 +45,22 @@ calendar.setOnClickListener('year-slider',
         console.log("Year next slider clicked");
     }
 );
-// Example
+
+
+
 // var data = {
-//     // December 25, 2017
-//     2017: {
+//     2022: {
 //         12: {
 //             25: [
-//                 // Christmas Day
 //                 {
 //                     startTime: "00:00",
 //                     endTime: "24:00",
 //                     text: "Christmas Day"
-//                 },
-//                 // Christmas Dinner
-//                 {
-//                     startTime: "5:00pm",
-//                     endTime: "11:00pm",
-//                     text: "Christmas Dinner"
 //                 }
 //             ]
 //         }
 //     }
-// }
-var data = {
-    2022: {
-        12: {
-            25: [
-                {
-                    startTime: "00:00",
-                    endTime: "24:00",
-                    text: "Christmas Day"
-                }
-            ]
-        }
-    }
-};
-var organizer = new Organizer("organizerContainer", // Organizer container id                      Required
-    calendar,             // Calendar item                               Required
-    data);                // Events data (Must follow specified format)  Required
+// };
+// var organizer = new Organizer("organizerContainer", // Organizer container id                      Required
+//     calendar,             // Calendar item                               Required
+//     data);                // Events data (Must follow specified format)  Required

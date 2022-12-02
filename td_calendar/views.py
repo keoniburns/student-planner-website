@@ -7,13 +7,65 @@ from django.contrib.auth import authenticate, login, logout
 from tasks.views import add
 from tasks.forms import TasksEntryForm
 from tasks.models import TasksEntry
+import json
 
 # Create your views here.
+# def valueToDict(_dict)
+
+
+#function to take all of our entries and organize for the calendar
+def maptodata (cal, entry):
+    year = month = day = 0
+    contents = {}
+
+    # for task entries
+    if (type(entry) is TasksEntry):
+        year = entry.date.year
+        month = entry.date.month
+        day = entry.date.day
+
+        text = f"{entry.course}: {entry.assignment}"
+
+        #default vals
+        start = "00:00"
+        end = "24:00"
+
+        contents = { "startTime":start, "endTime":end, "text":text }
+
+    # for class entries
+    elif(type(entry) is classEntry):
+        pass
+
+    #making sure dates are initialzed in calendar dict
+    if year not in cal:
+        cal[year] = {}
+    if month not in cal[year]:
+        cal[year][month] = {}
+    if day not in cal[year][month]:
+        cal[year][month][day] = []
+
+    cal[year][month][day].append(contents)
+
+
+    return cal
+
+
+
 
 
 @login_required(login_url='/login/')
 def td_calendar(request):
-    return render(request, 'td_calendar/td_calendar.html')
+    all_entries = TasksEntry.objects.filter(user=request.user)
+    cal = {}
+    for entry in all_entries:
+        cal = maptodata(cal, entry)
+
+
+    context = {
+        "cal" : json.dumps(cal)
+    }
+
+    return render(request, 'td_calendar/td_calendar.html', context)
 
 
 def newEvent(request):
