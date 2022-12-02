@@ -1,112 +1,72 @@
 <!DOCTYPE html>
-<html lang = "en-us">
-    <head>
-      <title>Organizer</title>
-      {% include "nav.html" %}
-      {% load static %}
-      {% include "bootstrap.html" %}
-      <link rel="stylesheet" href="{%static 'organizer.css' %}"/>
-      <link rel="stylesheet" href= "//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css"/>
-      <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-      <meta charset="utf-8">
+<html lang="en-us">
 
-    </head>
-
-  <body>
-   <h1>Organizer</h1>
-
-    <!-- NOT NECESSARY??????
-    <div class="ct-chart ct-perfect-fourth", id="example-pie-chart"></div>
-    <script>
-      new Chartist.Pie('#example-pie-chart',
-        { labels: ['Completed', 'Pending'], series: [3, 3] },
-        { labelInterpolationFnc: function(value) { return value[0] } },
-        [['screen', { chartPadding: 20, labelOffset: 60, labelDirection: 'explode',
-        labelInterpolationFnc: function(value) { return value;}}]]);
-    </script>
-    -->
-
-    <div class="jumbotron">
-      <div class="row">
-        <div class="col-6">
-          <div class="ct-pie-chart ct-perfect-fourth">
-            <script type="text/javascript">
-              var data = {
-                {% if complete == 0 and incomplete != 0 %}
-                  labels: ["incomplete", ""],
-                {% elif complete != 0 and incomplete == 0 %}
-                  labels: ["complete", ""],
-                {% else %}
-                  labels: ["complete", "incomplete"],
-                {% endif %}
-                series: [{{complete}}, {{incomplete}}]
-                // <!-- series: [data] -->
-              };
-              new Chartist.Pie('.ct-pie-chart', data);
-            </script>
-          </div>
-          <div class="center">
-            <a href="/tasks/" class="btn btn-primary">Tasks</a>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="ct-bar-chart ct-perfect-fourth">
-            <script type="text/javascript">
-            var data = {
-              labels: [
-                {% for i in bud %}
-                  "{{i.description}}",
-                {% endfor %}
-              ],
-              series: [
-                [
-                  {% for i in bud %}
-                    {{i.actual}},
-                  {% endfor %}
-                  ],
-                [
-                  {% for i in bud %}
-                    {{i.projected}},
-                  {% endfor %}
-                ]
-              ]
-            };
-            new Chartist.Bar('.ct-bar-chart', data);
-            </script>
-          </div>
-          <div class="center">
-            <a href="/budget/" class="btn btn-primary">Budget</a>
-          </div>
-        </div>
-      </div>
-    </div>
+<head>
+  <title>Organizer</title>
+  {% include "nav.html" %}
+  {% load static %}
+  {% include "bootstrap.html" %}
+  <link rel="stylesheet" href="{%static 'organizer.css' %}" />
+  <!-- <link rel="stylesheet" href= "//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css"/>
+      <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script> -->
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{%static 'organizer.css' %}" />
+  <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css"
+    rel="stylesheet" />
 
 
-    <!-- code for LFG for everyone -->
-    <h1> Looking For Group Posts </h1>
-<div id="accordion">
-  {% for P in LFG %}
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
-          {{ P.category }}: {{ P.assignment }}
-        </button>
-      </h5>
-    </div>
+</head>
 
-    <div id="collapse{{ forloop.counter }}" class="collapse show" aria-labelledby="heading{{ forloop.counter }}" data-parent="#accordion">
-      <div class="card-body">
-        <li><strong>Owner: </strong> {{ P.user }} </li>
-        <li><strong>Description: </strong> {{ P.description }} </li>
-        <li><strong>Location: </strong> {{ P.location }} </li>
-        <li><strong>Contact: </strong> {{ P.contact }} </li>
-      </div>
+<body>
+  <h1>Organizer</h1>
+
+  <div style="display: flex; justify-content: space-around;">
+    <div id="calendarContainer" style="display: inline-block;"></div>
+    <div id="organizerContainer" style="display: inline-block;">
     </div>
   </div>
-  {% endfor %}
-</div>
+  <br>
+  <div style="display: flex; justify-content: flex-start; flex-direction: column;">
+    <form method="GET" action="/td_calendar/newEvent">
+      <input type="submit" class="btn btn-primary" value="Add New Assignment"
+        style="margin-left: 10px; margin-right: 10px;">
+    </form>
 
+  </div>
 
+  <!-- Stick script at the end of the body -->
 
-  </body>
+  <!-- code for LFG for everyone -->
+  <h1> Looking For Group Posts </h1>
+  <div id="accordion">
+    {% for P in LFG %}
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}"
+            aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+            {{ P.category }}: {{ P.assignment }}
+          </button>
+        </h5>
+      </div>
+
+      <div id="collapse{{ forloop.counter }}" class="collapse show" aria-labelledby="heading{{ forloop.counter }}"
+        data-parent="#accordion">
+        <div class="card-body">
+          <li><strong>Owner: </strong> {{ P.user }} </li>
+          <li><strong>Description: </strong> {{ P.description }} </li>
+          <li><strong>Location: </strong> {{ P.location }} </li>
+          <li><strong>Contact: </strong> {{ P.contact }} </li>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
+  <script src="{% static 'td_calendar.js' %}"></script>
+  <script>
+    /* Fill with whatever your dreams desire */
+  </script>
+</body>
+
+</html>
