@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from core.forms import JoinForm, LoginForm
 from django.contrib.auth.decorators import login_required
-from tasks.models import TaskCategory, TasksEntry
+from tasks.models import TasksEntry
 from budget.models import BudgetCategory, BudgetEntry
 from LFG.models import LFGCategory, LFGEntry
 

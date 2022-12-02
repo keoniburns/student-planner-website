@@ -5,7 +5,8 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from tasks.forms import TasksEntryForm
 from django.contrib.auth.models import User
-from tasks.models import TasksEntry, TaskCategory
+from tasks.models import TasksEntry
+from Classes.models import ClassesEntry
 
 
 # Create your views here.
@@ -13,14 +14,6 @@ from tasks.models import TasksEntry, TaskCategory
 
 @login_required(login_url='/login/')
 def tasks(request):
-    if (TaskCategory.objects.count() == 0):
-
-        # this is going to have to be changed to be dynamically allocated based on the courses the student is enrolled in
-        TaskCategory(category="Home").save()
-        TaskCategory(category="School").save()
-        TaskCategory(category="Work").save()
-        TaskCategory(category="Self-Improvement").save()
-        TaskCategory(category="Other").save()
     if (request.method == "GET" and "delete" in request.GET):
         id = request.GET["delete"]
         TasksEntry.objects.filter(id=id).delete()
@@ -39,15 +32,12 @@ def add(request):
         if ("add" in request.POST):
             add_form = TasksEntryForm(request.POST)
             if (add_form.is_valid()):
-                task = add_form.cleaned_data["task"]
-                description = add_form.cleaned_data["description"]
+                assignment = add_form.cleaned_data["assignment"]
+                course = add_form.cleaned_data["course"]
                 date = add_form.cleaned_data["date"]
-                # entry = add_form.cleaned_data["entry"]
-                category = add_form.cleaned_data["category"]
                 user = User.objects.get(id=request.user.id)
                 # TasksEntry(user=user, description=description, entry=entry).save()
-                TasksEntry(user=user, task=task, description=description,
-                           category=category, date = date).save()
+                TasksEntry(user=user, assignment=assignment, course=course, date = date).save()
                 return redirect("/tasks/")
             else:
                 context = {

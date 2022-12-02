@@ -12,10 +12,10 @@ from django.contrib.auth import authenticate, login, logout
 @login_required(login_url='/login/')
 def Classes(request):
     if(ClassesCategory.objects.count() == 0):
-        ClassesCategory(category = "Fall").save()
-        ClassesCategory(category = "Winter").save()
-        ClassesCategory(category = "Spring").save()
-        ClassesCategory(category = "Summer").save()
+        ClassesCategory(semester = "Fall").save()
+        ClassesCategory(semester = "Winter").save()
+        ClassesCategory(semester = "Spring").save()
+        ClassesCategory(semester = "Summer").save()
 
     if (request.method == "GET" and "delete" in request.GET):
         id = request.GET["delete"]
@@ -24,7 +24,7 @@ def Classes(request):
     else:
         table_data = ClassesEntry.objects.filter(user=request.user)
         context = {
-            "table_data": table_data
+            "table_data": table_data,
         }
 
     return render(request, 'Classes/Classes.html', context)
@@ -37,11 +37,13 @@ def add(request):
             if (add_form.is_valid()):
                 user = User.objects.get(id=request.user.id)
                 name = add_form.cleaned_data["name"]
+                professor = add_form.cleaned_data["professor"]
                 units = add_form.cleaned_data["units"]
-                category = add_form.cleaned_data["category"]
-                year = add_form.cleaned_data["year"]
+                semester = add_form.cleaned_data["semester"]
+                s_date = add_form.cleaned_data["s_date"]
+                e_date = add_form.cleaned_data["e_date"]
 
-                ClassesEntry(user=user, name=name, units=units, category=category, year=year).save()
+                ClassesEntry(user=user, name=name, professor=professor, units=units, semester=semester, s_date=s_date, e_date=e_date).save()
                 return redirect("/Classes/")
             else:
                 context = {

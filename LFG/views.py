@@ -23,8 +23,10 @@ def LFG(request):
         return redirect("/LFG/")
     else:
         table_data = LFGEntry.objects.filter(user=request.user)
+        all_data = LFGEntry.objects.all()
         context = {
-            "table_data": table_data
+            "table_data": table_data,
+            "all_data": all_data
         }
     return render(request, 'LFG/LFG.html', context)
 

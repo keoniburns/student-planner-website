@@ -29,7 +29,10 @@
   <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
   <script src="{% static 'td_calendar.js' %}"></script>
   <script>
-    /* Fill with whatever your dreams desire */
+  var data = JSON.parse('{{ cal|escapejs }}');
+  var organizer = new Organizer("organizerContainer", // Organizer container id                      Required
+      calendar,             // Calendar item                               Required
+      data);
   </script>
 </body>
 

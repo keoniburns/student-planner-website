@@ -11,7 +11,7 @@
   <body>
     {% include "nav.html" %}
     <div class="jumbotron">
-      <h1>Looking for Group Posts</h1>
+      <h1>Your Looking For Group Posts</h1>
       {% if not table_data %}
     </p>You have no looking for group posts.</p>
       {% else %}
@@ -46,6 +46,33 @@
         <input type="submit" class="btn btn-primary" value ="Create Looking For Group Post">
       </form>
     </div>
+
+    <!-- code for LFG for everyone -->
+    <h1> All Looking For Group Posts </h1>
+<div id="accordion">
+  {% for P in all_data %}
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+          {{ P.category }}: {{ P.assignment }}
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapse{{ forloop.counter }}" class="collapse show" aria-labelledby="heading{{ forloop.counter }}" data-parent="#accordion">
+      <div class="card-body">
+        <li><strong>Owner: </strong> {{ P.user }} </li>
+        <li><strong>Description: </strong> {{ P.description }} </li>
+        <li><strong>Location: </strong> {{ P.location }} </li>
+        <li><strong>Contact: </strong> {{ P.contact }} </li>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
 
     <!-- Delete Modal -->
     <div id="deleteModal" class="modal fade" role='dialog'>
