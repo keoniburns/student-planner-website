@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from tasks.views import add
 from tasks.forms import TasksEntryForm
 from tasks.models import TasksEntry
+from Classes.models import ClassesEntry
 import json
 
 # Create your views here.
@@ -20,20 +21,21 @@ def maptodata (cal, entry):
 
     # for task entries
     if (type(entry) is TasksEntry):
-        year = entry.date.year
-        month = entry.date.month
-        day = entry.date.day
+        if(entry.is_completed == False):
+            year = entry.date.year
+            month = entry.date.month
+            day = entry.date.day
 
-        text = f"{entry.course}: {entry.assignment}"
+            text = f"{entry.course}: {entry.assignment}"
 
         #default vals
-        start = "00:00"
-        end = "24:00"
+            start = "00:00"
+            end = "24:00"
 
-        contents = { "startTime":start, "endTime":end, "text":text }
+            contents = { "startTime":start, "endTime":end, "text":text }
 
     # for class entries
-    elif(type(entry) is classEntry):
+    elif(type(entry) is ClassesEntry):
         pass
 
     #making sure dates are initialzed in calendar dict
@@ -55,10 +57,16 @@ def maptodata (cal, entry):
 
 @login_required(login_url='/login/')
 def td_calendar(request):
-    all_entries = TasksEntry.objects.filter(user=request.user)
     cal = {}
-    for entry in all_entries:
-        cal = maptodata(cal, entry)
+    if(TasksEntry.objects.count != 0):
+        all_task_entries = TasksEntry.objects.filter(user=request.user)
+        for entry in all_task_entries:
+            cal = maptodata(cal, entry)
+
+    if(ClassesEntry.objects.count != 0):
+        all_class_entries = ClassesEntry.objects.filter(user=request.user)
+        for entry in all_class_entries:
+            cal = maptodata(cal, entry)
 
 
     context = {

@@ -17,16 +17,18 @@
     <table class="table table-striped" border="1">
       <tr>
         <th>Class Name</th>
+        <th>Professor</th>
         <th>Units</th>
-        <th>Category</th>
-        <th>Year</th>
+        <th>Semester</th>
+        <th>Date</th>
        </tr>
        {% for row in table_data %}
           <tr>
           <td>{{ row.name }}</td>
+          <td>{{ row.professor}}</td>
           <td>{{ row.units }}</td>
-          <td>{{ row.category }}</td>
-          <td>{{ row.year }}</td>
+          <td>{{ row.semester }}</td>
+          <td>{{ row.s_date }} - {{row.e_date}}</td>
           <td>
             <a class="btn btn-primary" href="/Classes/edit/{{ row.id }}/">Edit</a>
             <a class="btn btn-primary" href="#" onclick= "confirmDeleteModal( {{row.id}})">Delete</a>
