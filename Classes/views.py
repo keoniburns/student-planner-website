@@ -37,11 +37,13 @@ def add(request):
             if (add_form.is_valid()):
                 user = User.objects.get(id=request.user.id)
                 name = add_form.cleaned_data["name"]
+                professor = add_form.cleaned_data["professor"]
                 units = add_form.cleaned_data["units"]
                 semester = add_form.cleaned_data["semester"]
                 s_date = add_form.cleaned_data["s_date"]
+                e_date = add_form.cleaned_data["e_date"]
 
-                ClassesEntry(user=user, name=name, units=units, semester=semester, s_date=s_date, e_date=e_date).save()
+                ClassesEntry(user=user, name=name, professor=professor, units=units, semester=semester, s_date=s_date, e_date=e_date).save()
                 return redirect("/Classes/")
             else:
                 context = {
