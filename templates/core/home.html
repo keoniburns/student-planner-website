@@ -18,12 +18,40 @@
 </head>
 
 <body>
-  <h1>Organizer</h1>
+  <h1>home</h1>
 
+  <body>
+    <div style="display: flex; justify-content: space-around; padding: 5px;">
+      <div id="calendarContainer" style="display: inline-block;"></div>
+      <div id="organizerContainer" style="display: inline-block;">
+      </div>
+    </div>
+    <br>
+    <div style="display: flex; justify-content: flex-start; flex-direction: column;">
+      <form method="GET" action="/td_calendar/newEvent">
+        <input type="submit" class="btn btn-primary" value="add new event"
+          style="margin-left: 10px; margin-right: 10px;">
+      </form>
+      <!-- <button class="btn btn-primary" style="margin-left: 10px; margin-right: 10px;">Add Event</button> -->
+    </div>
+
+
+
+    <!-- Stick script at the end of the body -->
+    <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
+    <script src="{% static 'td_calendar.js' %}"></script>
+    <script>
+      var data = JSON.parse('{{ cal|escapejs }}');
+      var organizer = new Organizer("organizerContainer", // Organizer container id                      Required
+        calendar,             // Calendar item                               Required
+        data);
+    </script>
+  </body>
+
+  <!-- 
   <div style="display: flex; justify-content: space-around;">
     <div id="calendarContainer" style="display: inline-block;"></div>
-    <div id="organizerContainer" style="display: inline-block;">
-    </div>
+    <div id="organizerContainer" style="display: inline-block;"></div>
   </div>
   <br>
   <div style="display: flex; justify-content: flex-start; flex-direction: column;">
@@ -32,15 +60,14 @@
         style="margin-left: 10px; margin-right: 10px;">
     </form>
 
-  </div>
+  </div> -->
 
   <!-- Stick script at the end of the body -->
 
-<<<<<<< HEAD
   <!-- code for LFG for everyone -->
-  <h1> Looking For Group Posts </h1>
+  <!-- <h1> Looking For Group Posts </h1>
   <div id="accordion">
-    {% for P in LFG %}
+    {% for P in all_data %}
     <div class="card">
       <div class="card-header" id="headingOne">
         <h5 class="mb-0">
@@ -49,39 +76,25 @@
             {{ P.category }}: {{ P.assignment }}
           </button>
         </h5>
-      </div>
-=======
-    <!-- code for LFG for everyone -->
-    <h1> Looking For Group Posts </h1>
-<div id="accordion">
-  {% for P in all_data %}
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
-          {{ P.category }}: {{ P.assignment }}
-        </button>
-      </h5>
-    </div>
->>>>>>> 57e7d5096de1731ea76d97831d9bee16383875e5
+      </div> -->
 
-      <div id="collapse{{ forloop.counter }}" class="collapse show" aria-labelledby="heading{{ forloop.counter }}"
-        data-parent="#accordion">
-        <div class="card-body">
-          <li><strong>Owner: </strong> {{ P.user }} </li>
-          <li><strong>Description: </strong> {{ P.description }} </li>
-          <li><strong>Location: </strong> {{ P.location }} </li>
-          <li><strong>Contact: </strong> {{ P.contact }} </li>
-        </div>
-      </div>
+  <!-- <div id="collapse{{ forloop.counter }}" class="collapse show" aria-labelledby="heading{{ forloop.counter }}"
+    data-parent="#accordion">
+    <div class="card-body">
+      <li><strong>Owner: </strong> {{ P.user }} </li>
+      <li><strong>Description: </strong> {{ P.description }} </li>
+      <li><strong>Location: </strong> {{ P.location }} </li>
+      <li><strong>Contact: </strong> {{ P.contact }} </li>
     </div>
-    {% endfor %}
   </div>
-  <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
+  </div>
+  {% endfor %}
+  </div>-->
+  <!-- <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
   <script src="{% static 'td_calendar.js' %}"></script>
   <script>
     /* Fill with whatever your dreams desire */
-  </script>
-</body>
+  </script> -->
+  <!-- </body> -->
 
 </html>

@@ -37,7 +37,8 @@ def add(request):
                 date = add_form.cleaned_data["date"]
                 user = User.objects.get(id=request.user.id)
                 # TasksEntry(user=user, description=description, entry=entry).save()
-                TasksEntry(user=user, assignment=assignment, course=course, date = date).save()
+                TasksEntry(user=user, assignment=assignment,
+                           course=course, date=date).save()
                 return redirect("/tasks/")
             else:
                 context = {
