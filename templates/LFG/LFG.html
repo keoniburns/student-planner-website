@@ -10,8 +10,8 @@
   </head>
   <body>
     {% include "nav.html" %}
+    <h1>Your Looking For Group Posts</h1>
     <div class="jumbotron">
-      <h1>Your Looking For Group Posts</h1>
       {% if not table_data %}
     </p>You have no looking for group posts.</p>
       {% else %}
@@ -32,11 +32,11 @@
           <td>{{ row.contact }}</td>
           <td>
             <a class="btn btn-primary" href="/LFG/edit/{{ row.id }}/">Edit</a>
-            <!-- <a class="btn btn-primary" href="#" onclick= "confirmDeleteModal( {{row.id}})">Delete</a>
-            -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            <a class="btn btn-primary" href="#" onclick= "confirmDeleteModal( {{row.id}})">Delete</a>
+
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
               Delete
-            </button>
+            </button> -->
             </td>
           </tr>
         {% endfor %}

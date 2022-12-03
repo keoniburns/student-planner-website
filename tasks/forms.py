@@ -8,7 +8,7 @@ class TasksEntryForm(forms.ModelForm):
     assignment = forms.CharField(widget=forms.TextInput(attrs={'size': '50'}))
     course = forms.CharField(widget=forms.TextInput(attrs={'size': '80'}))
     date = forms.DateField(widget=forms.SelectDateWidget)
-
+    time = forms.TimeField(widget=forms.TimeInput())
     class Meta():
         model = TasksEntry
         fields = ('assignment','course','date')
