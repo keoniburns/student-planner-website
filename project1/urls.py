@@ -24,7 +24,7 @@ from LFG import views as LFG_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', core_views.home),
+    path('', core_views.td_calendar),
     path('about/', core_views.about),
     path('join/', core_views.join),
     path('login/', core_views.user_login),
