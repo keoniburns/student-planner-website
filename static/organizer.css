@@ -24,6 +24,10 @@ body {
   background-color: silver;
 }
 
+.card {
+  background-color: silver;
+}
+
 .jumbotron p {font-size:27px; }
 
 p { font-size: 27px;}

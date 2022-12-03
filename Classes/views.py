@@ -23,6 +23,9 @@ def Classes(request):
         return redirect("/Classes/")
     else:
         table_data = ClassesEntry.objects.filter(user=request.user)
+
+        
+
         context = {
             "table_data": table_data,
         }
