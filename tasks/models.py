@@ -7,4 +7,5 @@ class TasksEntry(models.Model):
     assignment = models.CharField(max_length=128)
     course = models.CharField(max_length=128)
     date = models.DateField()
+    time = models.TimeField()
     is_completed = models.BooleanField(default=False)

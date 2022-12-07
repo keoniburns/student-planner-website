@@ -45,8 +45,14 @@ def Classes(request):
         return redirect("/Classes/")
     else:
         table_data = ClassesEntry.objects.filter(user=request.user)
+<<<<<<< HEAD
         # for entry in table_data:
         #     header_data = collapseData(header_data, entry)
+=======
+
+        
+
+>>>>>>> 8646abcf6231777b4728c9b611edc2d04c0d85b7
         context = {
             "table_data": table_data,
             "header_data": header_data
