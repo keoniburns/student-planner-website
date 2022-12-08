@@ -1,20 +1,22 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Looking for Group</title>
-    {% include "bootstrap.html" %}
-    {% load crispy_forms_tags%}
-      {% load static %}
-      <link rel="stylesheet" href="{%static 'organizer.css' %}"/>
-    <script src="{% static 'tasks.js' %}"></script>
-  </head>
-  <body>
-    {% include "nav.html" %}
-    <div class="jumbotron">
-      <h1>Your Looking For Group Posts</h1>
-      {% if not table_data %}
+
+<head>
+  <meta charset="utf-8">
+  <title>Looking for Group</title>
+  {% include "bootstrap.html" %}
+  {% load crispy_forms_tags%}
+  {% load static %}
+  <link rel="stylesheet" href="{%static 'organizer.css' %}" />
+  <script src="{% static 'tasks.js' %}"></script>
+</head>
+
+<body>
+  {% include "nav.html" %}
+  <div class="jumbotron">
+    <h1>Your Looking For Group Posts</h1>
+    {% if not table_data %}
     </p>You have no looking for group posts.</p>
-      {% else %}
+    {% else %}
     <table class="table table-striped" border="1">
       <tr>
         <th>Category</th>
@@ -22,81 +24,84 @@
         <th>Description</th>
         <th>Location</th>
         <th>Contact</th>
-       </tr>
-       {% for row in table_data %}
-          <tr>
-          <td>{{ row.category }}</td>
-          <td>{{ row.assignment }}</td>
-          <td>{{ row.description }}</td>
-          <td>{{ row.location }}</td>
-          <td>{{ row.contact }}</td>
-          <td>
-            <a class="btn btn-primary" href="/LFG/edit/{{ row.id }}/">Edit</a>
-            <!-- <a class="btn btn-primary" href="#" onclick= "confirmDeleteModal( {{row.id}})">Delete</a>
+      </tr>
+      {% for row in table_data %}
+      <tr>
+        <td>{{ row.category }}</td>
+        <td>{{ row.assignment }}</td>
+        <td>{{ row.description }}</td>
+        <td>{{ row.location }}</td>
+        <td>{{ row.contact }}</td>
+        <td>
+          <a class="btn btn-primary" href="/LFG/edit/{{ row.id }}/">Edit</a>
+          <!-- <a class="btn btn-primary" href="#" onclick= "confirmDeleteModal( {{row.id}})">Delete</a>
             -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
-              Delete
-            </button>
-            </td>
-          </tr>
-        {% endfor %}
-          </table>
-        {% endif %}
-      <form method="GET" action="/LFG/add/">
-        <input type="submit" class="btn btn-primary" value ="Create Looking For Group Post">
-      </form>
-    </div>
-
-    <!-- code for LFG for everyone -->
-    <h1> All Looking For Group Posts </h1>
-<div id="accordion">
-  {% for P in all_data %}
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
-          {{ P.category }}: {{ P.assignment }}
-        </button>
-      </h5>
-    </div>
-
-    <div id="collapse{{ forloop.counter }}" class="collapse show" aria-labelledby="heading{{ forloop.counter }}" data-parent="#accordion">
-      <div class="card-body">
-        <li><strong>Owner: </strong> {{ P.user }} </li>
-        <li><strong>Description: </strong> {{ P.description }} </li>
-        <li><strong>Location: </strong> {{ P.location }} </li>
-        <li><strong>Contact: </strong> {{ P.contact }} </li>
-      </div>
-    </div>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            Delete
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+    <form method="GET" action="/LFG/add/">
+      <input type="submit" class="btn btn-primary" value="Create Looking For Group Post">
+    </form>
   </div>
-  {% endfor %}
-</div>
 
+  <!-- code for LFG for everyone -->
+  <h1> All Looking For Group Posts </h1>
+  <div id="accordion">
+    {% for P in all_data %}
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}"
+            aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+            {{ P.category }}: {{ P.assignment }}
+          </button>
+        </h5>
+      </div>
 
-
-    <!-- Delete Modal -->
-    <div id="deleteModal" class="modal fade" role='dialog'>
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">Delete LFG Entry</h4>
-          </div>
-          <div class="modal-body">
-            <p>Do you really want to delete this LFG Entry?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <span id= 'deleteButton'></span>
-          </div>
+      <div id="collapse{{ forloop.counter }}" class="collapse show" aria-labelledby="heading{{ forloop.counter }}"
+        data-parent="#accordion">
+        <div class="card-body">
+          <li><strong>Owner: </strong> {{ P.user }} </li>
+          <li><strong>Description: </strong> {{ P.description }} </li>
+          <li><strong>Location: </strong> {{ P.location }} </li>
+          <li><strong>Contact: </strong> {{ P.contact }} </li>
         </div>
       </div>
     </div>
+    {% endfor %}
+  </div>
+
+
+
+  <!-- Delete Modal -->
+  <div id="deleteModal" class="modal fade" role='dialog'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Delete LFG Entry</h4>
+        </div>
+        <div class="modal-body">
+          <p>Do you really want to delete this LFG Entry?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <span id='deleteButton'></span>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
 
 
 
-  </body>
+</body>
+
 </html>
