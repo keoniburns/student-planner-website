@@ -6,11 +6,33 @@ from Classes.forms import ClassesEntryForm
 from Classes.models import ClassesEntry, ClassesCategory
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+import json
 
+# def collapseData (header_data, entry):
+#     # year = 0
+#     # semester = ""
+#     # info = {}
+#     # semester = "pog"
+#     # year = entry.s_date.year
+#     # text = f"Course: {entry.name} | Professor: {entry.professor} | Units: {entry.units} | Dates attended: {entry.s_date} - {entry.e_date}"
+#     # info = {"text": text}
+#     #
+#     # if semester not in cal:
+#     #     header_data[semester] = {}
+#     # if year not in cal[semester]:
+#     #     header_data[semester][year] = []
+#     #
+#     # header_data[semester][year].append(info)
+#
+#     semMonth = " "
+#     semMonth
+#
+#     return header_data
 
 # Create your views here.
 @login_required(login_url='/login/')
 def Classes(request):
+    header_data = ["Fall","Winter", "Spring", "Summer"]
     if(ClassesCategory.objects.count() == 0):
         ClassesCategory(semester = "Fall").save()
         ClassesCategory(semester = "Winter").save()
@@ -23,9 +45,19 @@ def Classes(request):
         return redirect("/Classes/")
     else:
         table_data = ClassesEntry.objects.filter(user=request.user)
+<<<<<<< HEAD
+        # for entry in table_data:
+        #     header_data = collapseData(header_data, entry)
+=======
+
+        
+
+>>>>>>> 8646abcf6231777b4728c9b611edc2d04c0d85b7
         context = {
             "table_data": table_data,
+            "header_data": header_data
         }
+
 
     return render(request, 'Classes/Classes.html', context)
 
@@ -84,6 +116,7 @@ def edit(request, id):
         else:
             #Cancel
             return redirect("/Classes/")
+
 
 # def pie_chart(request):
 #     data = [1,3]

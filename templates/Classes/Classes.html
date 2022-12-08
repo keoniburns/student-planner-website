@@ -11,21 +11,21 @@
 
 <body>
   {% include "nav.html" %}
+  <h1>Class Entries</h1>
   <div class="jumbotron">
-    <h1>Class Entries</h1>
     {% if not table_data %}
     </p>There are no Classes entries to display.</p>
 
 
     {% else %}
     <div id="accordion">
-      {% for i in table_data %}
+      {% for element in table_data %}
       <div class="card">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
             <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}"
               aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
-              {{ i.semester }} {{ i.s_date.year}}
+              {{ element.semester }} {{ element.s_date.year }}
             </button>
           </h5>
         </div>
