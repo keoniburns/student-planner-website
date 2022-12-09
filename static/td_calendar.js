@@ -1,10 +1,10 @@
 var calendar = new Calendar("calendarContainer",         // HTML container ID,                                                                     Required
     "large",                     // Size: (small, medium, large)                                                           Required
     ["Sunday", 3],               // [ Starting day, day abbreviation length ]                                              Required
-    ["#ffc107",                 // Primary Color                                                                          Required
-        "#ffa000",                 // Primary Dark Color                                                                     Required
+    ["#313131",                 // Primary Color                                                                          Required
+        "#525252",                 // Primary Dark Color                                                                     Required
         "#ffffff",                 // Text Color                                                                             Required
-        "#ffecb3"],               // Text Dark Color                                                                        Required
+        "#ffffff"],               // Text Dark Color                                                                        Required
     { // Following is optional
         days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
         months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],

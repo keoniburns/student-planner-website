@@ -21,6 +21,7 @@
         <th>Assignment</th>
         <th>Course</th>
         <th>Due Date</th>
+        <th>Due Time</th>
         <th>Complete</th>
         <th>Action</th>
 
@@ -31,6 +32,7 @@
         <td>{{ row.assignment }}</td>
         <td>{{ row.course }}</td>
         <td>{{ row.date }}</td>
+        <td>{{ row.time }}</td>
         <form method="POST" action="/tasks/toggle/{{row.id}}/">
           {% csrf_token %}
           {%if row.is_completed == True %}
