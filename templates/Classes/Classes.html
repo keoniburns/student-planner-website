@@ -41,6 +41,7 @@
                 <th>Date</th>
               </tr>
               {% for row in table_data %}
+              {% if row.semester == element.semester %}
               <tr>
                 <td>{{ row.name }}</td>
                 <td>{{ row.professor}}</td>
@@ -52,6 +53,7 @@
                   <a class="btn btn-primary" href="#" onclick="confirmDeleteModal( {{row.id}})">Delete</a>
                 </td>
               </tr>
+              {% endif %}
               {% endfor %}
             </table>
           </div>

@@ -9,36 +9,30 @@ from tasks.forms import TasksEntryForm
 from tasks.models import TasksEntry
 from Classes.models import ClassesEntry
 import json
+from datetime import timedelta
 
 # Create your views here.
 # def valueToDict(_dict)
 
 
-#function to take all of our entries and organize for the calendar
-def maptodata (cal, entry):
+# function to take all of our entries and organize for the calendar
+def maptodata(cal, entry):
     year = month = day = 0
     contents = {}
 
-    # for task entries
-    if (type(entry) is TasksEntry):
-        if(entry.is_completed == False):
-            year = entry.date.year
-            month = entry.date.month
-            day = entry.date.day
+# for task entries
+    if (entry.is_completed == False):
+        year = entry.date.year
+        month = entry.date.month
+        day = entry.date.day
 
-            text = f"{entry.course}: {entry.assignment}"
+        text = f"{entry.course}: {entry.assignment}"
 
-        #default vals
-            start = "00:00"
-            end = "24:00"
+    # default vals
+        start = "00:00"
+        end = "24:00"
 
-            contents = { "startTime":start, "endTime":end, "text":text }
-
-    # for class entries
-    elif(type(entry) is ClassesEntry):
-        pass
-
-    #making sure dates are initialzed in calendar dict
+        contents = {"startTime": start, "endTime": end, "text": text}
     if year not in cal:
         cal[year] = {}
     if month not in cal[year]:
@@ -48,32 +42,51 @@ def maptodata (cal, entry):
 
     cal[year][month][day].append(contents)
 
+    return cal
+
+
+def mapClasses(cal, curDate, name):
+    # for class entries
+    year = curDate.year
+    month = curDate.month
+    day = curDate.day
+
+    # ClassesEntry.s_date.
+    text = f"{name}"
+    contents = {"startTime": start, "endTime": end, "text": text}
+
+    # making sure dates are initialzed in calendar dict
+    if year not in cal:
+        cal[year] = {}
+    if month not in cal[year]:
+        cal[year][month] = {}
+    if day not in cal[year][month]:
+        cal[year][month][day] = []
+
+    cal[year][month][day].append(contents)
 
     return cal
 
 
-
-
-
 @login_required(login_url='/login/')
 def td_calendar(request):
-    cal = {}
-    if(TasksEntry.objects.count != 0):
+    # cal = {}
+    if (TasksEntry.objects.count != 0):
         all_task_entries = TasksEntry.objects.filter(user=request.user)
         for entry in all_task_entries:
             cal = maptodata(cal, entry)
-
-    if(ClassesEntry.objects.count != 0):
+    if (ClassesEntry.objects.count != 0):
         all_class_entries = ClassesEntry.objects.filter(user=request.user)
         for entry in all_class_entries:
-            cal = maptodata(cal, entry)
+            curDate = entry.s_date
+            while curDate != entry.e_date:
+                cal = mapClasses(cal, curDate, entry.name)
+                curDate = curDate + timedelta(days=1)
+    # context = {
+    #     "cal": json.dumps(cal)
+    # }
 
-
-    context = {
-        "cal" : json.dumps(cal)
-    }
-
-    return render(request, 'td_calendar/td_calendar.html', context)
+    return render(request, 'td_calendar/td_calendar.html')
 
 
 def newEvent(request):

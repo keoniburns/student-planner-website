@@ -11,7 +11,8 @@ from tasks.views import add
 from LFG.models import LFGCategory, LFGEntry
 import json
 from Classes.models import ClassesEntry
-
+from datetime import timedelta, date
+from dateutil import parser
 # Create your views here.
 
 
@@ -19,24 +20,42 @@ def maptodata(cal, entry):
     year = month = day = 0
     contents = {}
 
-    # for task entries
-    if (type(entry) is TasksEntry):
-        if (entry.is_completed == False):
-            year = entry.date.year
-            month = entry.date.month
-            day = entry.date.day
+# for task entries
+    if (entry.is_completed == False):
+        year = entry.date.year
+        month = entry.date.month
+        day = entry.date.day
 
-            text = f"{entry.course}: {entry.assignment}"
+        text = f"{entry.course}: {entry.assignment}"
 
-        # default vals
-            start = "00:00"
-            end = "24:00"
+    # default vals
+        start = "00:00"
+        end = "24:00"
 
-            contents = {"startTime": start, "endTime": end, "text": text}
+        contents = {"startTime": start, "endTime": end, "text": text}
+    if year not in cal:
+        cal[year] = {}
+    if month not in cal[year]:
+        cal[year][month] = {}
+    if day not in cal[year][month]:
+        cal[year][month][day] = []
 
+    cal[year][month][day].append(contents)
+
+    return cal
+
+
+def mapClasses(cal, curDate, name):
     # for class entries
-    elif (type(entry) is ClassesEntry):
-        pass
+    year = curDate.year
+    month = curDate.month
+    day = curDate.day
+    start = "00:00"
+    end = "24:00"
+
+    # ClassesEntry.s_date.
+    text = f"{name}"
+    contents = {"startTime": start, "endTime": end, "text": text}
 
     # making sure dates are initialzed in calendar dict
     if year not in cal:
@@ -139,17 +158,20 @@ def user_logout(request):
 
 @login_required(login_url='/login/')
 def td_calendar(request):
+    weekends = [6, 7]
     cal = {}
     if (TasksEntry.objects.count != 0):
         all_task_entries = TasksEntry.objects.filter(user=request.user)
         for entry in all_task_entries:
             cal = maptodata(cal, entry)
-
     if (ClassesEntry.objects.count != 0):
         all_class_entries = ClassesEntry.objects.filter(user=request.user)
         for entry in all_class_entries:
-            cal = maptodata(cal, entry)
-
+            curDate = entry.s_date
+            while curDate < entry.e_date:
+                if curDate.isoweekday() not in weekends:
+                    cal = mapClasses(cal, curDate, entry.name)
+                curDate = curDate + timedelta(days=1,)
     context = {
         "cal": json.dumps(cal)
     }

@@ -2,24 +2,32 @@
 
 <html>
 {%include "nav.html"%}
+
 <head>
 
-    {% load static %}
-    <link rel="stylesheet" href="{%static 'organizer.css' %}"/>
-    {%include "bootstrap.html"%}
+  {% load static %}
+  <link rel="stylesheet" href="{%static 'organizer.css' %}" />
+  {%include "bootstrap.html"%}
 </head>
+
 <body>
   <title>About </title>
-<h1>
+  <h1>
     About
-</h1>
-<p>
-  This site was created by Jordan Silva, Keoni Burns, and Travis Kroll. We wanted to organize all our school work in a single place.
-  We learned everything needed for this website in Web Development at Chico State.  
+  </h1>
+  <p>
+    This site was created by Jordan Silva, Keoni Burns, and Travis Kroll. We wanted to organize all our school work in a
+    single place.
+    We learned everything needed for this website in Web Development at Chico State.
 
- </p>
- <h1>
-    <img src= "{% static "/imgs/boys" %}" alt="my photo" style = "width: 600px; height: auto;">
- </h1>
+    our program is a basic scheduler that allows the user to add tasks ssuch as hw, meetings, etc. Additionally we have
+    implemented a blog post
+    where students may look for study groups.
+
+  </p>
+  <h1>
+    <img src="{% static " /imgs/boys" %}" alt="my photo" style="width: 600px; height: auto;">
+  </h1>
 </body>
+
 </html>
