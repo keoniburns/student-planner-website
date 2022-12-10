@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>New Classes Entry</title>
+  {% include "bootstrap.html" %}
   {% load static %}
   <link rel="stylesheet" href="{%static 'organizer.css' %}"/>
-  {% include "bootstrap.html" %}
   <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet" />
 </head>
 
@@ -15,7 +15,7 @@
     <h1>Add Classes Entry</h1>
     <form method="POST">
       {% csrf_token %}
-      <table>
+      <table class="haha">
         {{ form_data.as_table }}
         <tr>
           <td></td>

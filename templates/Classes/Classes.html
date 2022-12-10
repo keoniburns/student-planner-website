@@ -39,6 +39,7 @@
                 <th>Units</th>
                 <th>Semester</th>
                 <th>Date</th>
+                <th>Days</th>
               </tr>
               {% for row in table_data %}
               {% if row.semester == element.semester %}
@@ -48,6 +49,22 @@
                 <td>{{ row.units }}</td>
                 <td>{{ row.semester }}</td>
                 <td>{{ row.s_date }} - {{row.e_date}}</td>
+                <td>{% if row.mon == True %}
+                      Mon,
+                    {% endif %}
+                    {% if row.tue == True %}
+                      Tue,
+                    {% endif %}
+                    {% if row.wed == True %}
+                      Wed,
+                    {% endif %}
+                    {% if row.thurs == True %}
+                      Thurs,
+                    {% endif %}
+                    {% if row.fri == True %}
+                      Fri
+                    {% endif %}
+                </td>
                 <td>
                   <a class="btn btn-primary" href="/Classes/edit/{{ row.id }}/">Edit</a>
                   <a class="btn btn-primary" href="#" onclick="confirmDeleteModal( {{row.id}})">Delete</a>

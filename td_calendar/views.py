@@ -29,9 +29,9 @@ def maptodata(cal, entry):
         text = f"{entry.course}: {entry.assignment}"
 
     # default vals
-        start = "00:00"
-        end = "24:00"
-
+        start = f"{entry.time}"
+        end = "10:00"
+        print(start)
         contents = {"startTime": start, "endTime": end, "text": text}
     if year not in cal:
         cal[year] = {}
@@ -98,10 +98,11 @@ def newEvent(request):
                 assignment = add_form.cleaned_data["assignment"]
                 course = add_form.cleaned_data["course"]
                 date = add_form.cleaned_data["date"]
+                time = add_form.cleaned_data["time"]
                 user = User.objects.get(id=request.user.id)
                 # TasksEntry(user=user, description=description, entry=entry).save()
                 TasksEntry(user=user, assignment=assignment,
-                           course=course, date=date).save()
+                           course=course, date=date, time=time).save()
                 return redirect("/td_calendar/")
             else:
                 context = {

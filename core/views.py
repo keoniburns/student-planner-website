@@ -29,8 +29,8 @@ def maptodata(cal, entry):
         text = f"{entry.course}: {entry.assignment}"
 
     # default vals
-        start = "00:00"
-        end = "24:00"
+        start = f"{entry.time}"
+        end = f"{entry.time}"
 
         contents = {"startTime": start, "endTime": end, "text": text}
     if year not in cal:
@@ -45,16 +45,16 @@ def maptodata(cal, entry):
     return cal
 
 
-def mapClasses(cal, curDate, name):
+def mapClasses(cal, curDate, entry):
     # for class entries
     year = curDate.year
     month = curDate.month
     day = curDate.day
-    start = "00:00"
-    end = "24:00"
+    start = f"{entry.s_time}"
+    end = f"{entry.e_time}"
 
     # ClassesEntry.s_date.
-    text = f"{name}"
+    text = f"{entry.name}: {entry.professor}"
     contents = {"startTime": start, "endTime": end, "text": text}
 
     # making sure dates are initialzed in calendar dict
@@ -167,11 +167,46 @@ def td_calendar(request):
     if (ClassesEntry.objects.count != 0):
         all_class_entries = ClassesEntry.objects.filter(user=request.user)
         for entry in all_class_entries:
-            curDate = entry.s_date
-            while curDate < entry.e_date:
-                if curDate.isoweekday() not in weekends:
-                    cal = mapClasses(cal, curDate, entry.name)
-                curDate = curDate + timedelta(days=1,)
+            if entry.mon == True:
+                curDate = entry.s_date
+                while curDate.isoweekday() != 1:
+                    curDate = curDate + timedelta(days=1,)
+                while curDate < entry.e_date:
+                    if curDate.isoweekday() not in weekends:
+                        cal = mapClasses(cal, curDate, entry)
+                        curDate = curDate + timedelta(days=7,)
+            if entry.tue == True:
+                curDate = entry.s_date
+                while curDate.isoweekday() != 2:
+                    curDate = curDate + timedelta(days=1,)
+                while curDate < entry.e_date:
+                    if curDate.isoweekday() not in weekends:
+                        cal = mapClasses(cal, curDate, entry)
+                        curDate = curDate + timedelta(days=7,)
+            if entry.wed == True:
+                curDate = entry.s_date
+                while curDate.isoweekday() != 3:
+                    curDate = curDate + timedelta(days=1,)
+                while curDate < entry.e_date:
+                    if curDate.isoweekday() not in weekends:
+                        cal = mapClasses(cal, curDate, entry)
+                        curDate = curDate + timedelta(days=7,)
+            if entry.thurs == True:
+                curDate = entry.s_date
+                while curDate.isoweekday() != 4:
+                    curDate = curDate + timedelta(days=1,)
+                while curDate < entry.e_date:
+                    if curDate.isoweekday() not in weekends:
+                        cal = mapClasses(cal, curDate, entry)
+                        curDate = curDate + timedelta(days=7,)
+            if entry.fri == True:
+                curDate = entry.s_date
+                while curDate.isoweekday() != 5:
+                    curDate = curDate + timedelta(days=1,)
+                while curDate < entry.e_date:
+                    if curDate.isoweekday() not in weekends:
+                        cal = mapClasses(cal, curDate, entry)
+                        curDate = curDate + timedelta(days=7,)
     context = {
         "cal": json.dumps(cal)
     }

@@ -69,9 +69,17 @@ def add(request):
                 semester = add_form.cleaned_data["semester"]
                 s_date = add_form.cleaned_data["s_date"]
                 e_date = add_form.cleaned_data["e_date"]
+                s_time = add_form.cleaned_data["s_time"]
+                e_time = add_form.cleaned_data["e_time"]
+                mon = add_form.cleaned_data["mon"]
+                tue = add_form.cleaned_data["tue"]
+                wed = add_form.cleaned_data["wed"]
+                thurs = add_form.cleaned_data["thurs"]
+                fri = add_form.cleaned_data["fri"]
 
                 ClassesEntry(user=user, name=name, professor=professor, units=units,
-                             semester=semester, s_date=s_date, e_date=e_date).save()
+                             semester=semester, s_date=s_date, e_date=e_date, s_time=s_time,
+                             e_time=e_time, mon=mon, tue=tue, wed=wed, thurs=thurs, fri=fri).save()
                 return redirect("/Classes/")
             else:
                 context = {
