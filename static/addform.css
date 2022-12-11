@@ -1,0 +1,44 @@
+body {
+  background-image: url("imgs/BG.jpg");
+  /*background-image: url("imgs/meme.png");*/
+  background-color: #cccccc;
+}
+
+
+table{
+  background-color: silver;
+}
+
+.jumbotron {
+  background-color: silver;
+}
+
+.jumbotron p {font-size:27px; }
+
+h1 {
+  font-weight: bold;
+  color: #282A3A;
+  font-size: 50px;
+  text-align: center; }
+
+
+  .btn-primary{
+    background-color: 497174;
+    border: 2px solid #3f4e4f;
+  }
+
+
+  td {
+   text-align: center;
+   width: 48px;
+   height: 48px;
+   font-size: 24px;
+ }
+
+ th:not(.haha){
+   background-color: silver;
+   text-align: center;
+   width: 48px;
+   height: 48px;
+   font-size: 24px;
+ }
